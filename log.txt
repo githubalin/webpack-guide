@@ -9,4 +9,5 @@
         1、CommonsChunkPlugin 在 v4 被 SplitChunksPlugin（通过配置 optimization.splitChunks） 替换
         2、可以除重，比如两个业务模块都引用了第三方库 lodash，可以将 lodash 单独打包，单独缓存（如果做到 vendor 的 hash 不变？）
     3、使用动态加载方法 import()
-
+        可以结合框架路由，页面按需加载，已减小包体
+总结：SplitChunksPlugin 很多配置需要深入，可以解决持久缓存，css 分割缓存等问题；而 import 需要结合框架

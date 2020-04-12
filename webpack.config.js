@@ -8,17 +8,16 @@ const {
     HashedModuleIdsPlugin
 } = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Visualizer = require('webpack-visualizer-plugin');
 
 module.exports = {
     mode: 'development',
     entry: {
-        shared: 'lodash',
-        app: './src/index.js',
-        print: './src/print.js'
+        app: './src/index.js'
     },
     output: {
         filename: '[name].[hash].bundle.js',
-        chunkFilename: '[name].bundle.js',
+        chunkFilename: '[name].[hash].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     plugins: [
@@ -30,7 +29,8 @@ module.exports = {
         new HashedModuleIdsPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[hash].css',
-        })
+        }),
+        new Visualizer()
     ],
     devtool: 'inline-source-map',
     devServer: {
