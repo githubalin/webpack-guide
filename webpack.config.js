@@ -16,21 +16,21 @@ module.exports = {
         app: './src/index.js'
     },
     output: {
-        filename: '[name].[hash].bundle.js',
-        chunkFilename: '[name].[hash].bundle.js',
+        filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist')
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './index.html'
+            template: './index.html',
+            title: 'caching'
         }),
         new CleanWebpackPlugin(),
-        new WebpackManifestPlugin(),
-        new HashedModuleIdsPlugin(),
-        new MiniCssExtractPlugin({
-            filename: '[name].[hash].css',
-        }),
-        new Visualizer()
+        // new WebpackManifestPlugin(),
+        // new HashedModuleIdsPlugin(),
+        // new MiniCssExtractPlugin({
+        //     filename: '[name].[hash].css',
+        // }),
+        // new Visualizer()
     ],
     devtool: 'inline-source-map',
     devServer: {
@@ -46,24 +46,17 @@ module.exports = {
             }
         ]
     },
-    // optimization: {
-    //     splitChunks: {
-    //         chunks: 'all',
-    //         cacheGroups: {
-    //             // vendor: {
-    //             //     test: /[\\/]node_modules[\\/]/,
-    //             //     name: 'vendors',
-    //             //     chunks: 'all'
-    //             // },
-    //             styles: {
-    //                 name: 'styles',
-    //                 test: /\.css$/,
-    //                 chunks: 'all',
-    //                 enforce: true,
-    //             },
-    //         },
-    //         // 连接符
-    //         automaticNameDelimiter: '-'
-    //     }
-    // }
+    optimization: {
+        runtimeChunk: 'single',
+        moduleIds: 'hashed',
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                },
+            }
+        }
+    }
 }
