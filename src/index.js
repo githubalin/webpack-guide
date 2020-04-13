@@ -1,13 +1,14 @@
-import _ from 'lodash'
-import a from './a'
+import _ from 'lodash';
+import numRef from './ref.json';
 
-const component = () => {
-    const ele = document.createElement('div')
-    const btn = document.createElement('button')
-    btn.innerHTML = 'load dynamic module!1`2123123'
-    ele.appendChild(btn)
-    ele.onclick = a.bind(null)
-    return ele
+export function numToWord(num) {
+    return _.reduce(numRef, (accum, ref) => {
+        return ref.num === num ? ref.word : accum;
+    }, '');
 }
 
-document.body.appendChild(component())
+export function wordToNum(word) {
+    return _.reduce(numRef, (accum, ref) => {
+        return ref.word === word && word.toLowerCase() ? ref.num : accum;
+    }, -1);
+}
