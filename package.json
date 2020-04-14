@@ -18,6 +18,6 @@
   "homepage": "https://github.com/githubalin/webpack-guide#readme",
   "devDependencies": {
     "nodealin1": "^1.0.0",
-    "webpack-guide": "^1.3.0"
+    "webpack-guide": "^1.4.0"
   }
 }
