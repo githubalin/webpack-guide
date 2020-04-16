@@ -2,11 +2,11 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WebpackManifestPlugin = require('webpack-manifest-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
     entry: {
-        app: './src/index.js',
-        print: './src/print.js'
+        app: './src/index.js'
     },
     output: {
         filename: '[name].[hash].bundle.js',
@@ -14,9 +14,14 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './index.html'
+            template: './index.html',
+            title: 'Progressive Web Application'
         }),
         new CleanWebpackPlugin(),
-        new WebpackManifestPlugin()
+        new WebpackManifestPlugin(),
+        new WorkboxPlugin.GenerateSW({
+            // clientsGlaim: true,
+            skipWaiting: true
+        })
     ]
 }
